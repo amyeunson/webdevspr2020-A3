@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 
-class App extends Component {
+class Search extends Component {
   render() {
     return (
       <p>Put your components here</p>
@@ -9,4 +9,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Search;
