@@ -12,13 +12,13 @@ class Lists extends Component {
       <Container>
         <Card >
           <CardHeader>To Read List</CardHeader>
-          {/* Book Item  */}
+          {/* Book Items  */}
           <CardBody>
               {this.props.toReadList.map((book)=>
                 <div>
                   <CardTitle>{book.title}</CardTitle>
                     <CardText>  
-                      <BookItem className="mt-2"author={book.author}/>
+                      <BookItem className="mt-2" author={book.author} direction="Mark As Read" shelfLocation="ToRead"/>
                     </CardText>
                 </div>     
               )}      
@@ -30,13 +30,13 @@ class Lists extends Component {
       <Container>
         <Card >
           <CardHeader>Have Read List</CardHeader>
-          {/* Book Item  */}
+          {/* Book Items  */}
           <CardBody>
               {this.props.haveReadList.map((book)=>
                 <div>
                   <CardTitle>{book.title}</CardTitle>
                     <CardText>  
-                      <BookItem author={book.author}/>
+                      <BookItem author={book.author} direction="Mark As Not Read" shelfLocation="HaveRead"/>
                     </CardText>
                 </div>     
               )}      
@@ -48,11 +48,13 @@ class Lists extends Component {
   }
 }
 
+
 let mapStateToProps = function mapStateToProps(state, props) {
   return { 
     toReadList: state.bookLists.toRead,
     haveReadList: state.bookLists.haveRead
   }
 }
+
 
 export default connect(mapStateToProps)(Lists);

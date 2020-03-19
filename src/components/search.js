@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, InputGroup, Button, Input, Row, Col } from 'reactstrap';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { search } from '../redux/actions';
 
 class Search extends Component {
