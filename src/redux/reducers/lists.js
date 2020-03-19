@@ -1,8 +1,8 @@
 import { ADD_BOOK, MOVE_BOOK, DELETE_BOOK } from "../actionTypes";
-import { searchInitialState } from '../../constants';
+import { listsInitialState } from '../../constants';
 
 
-export default function (state = searchInitialState, action) {
+export default function list(state = listsInitialState, action) {
     switch (action.type) {
         case ADD_BOOK: {
             return state;
@@ -17,3 +17,4 @@ export default function (state = searchInitialState, action) {
             return state;
     }
 }
+
