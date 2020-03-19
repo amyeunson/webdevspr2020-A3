@@ -3,6 +3,6 @@ import searches from './searches';
 import list from "./lists";
 
 export default combineReducers({
-    search: searches,
-    bookLists: list
+    search: searches, // search: string
+    bookLists: list // toRead: [bookInfo], haveRead: [bookItem]
 });

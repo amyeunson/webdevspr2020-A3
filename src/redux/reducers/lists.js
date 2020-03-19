@@ -1,5 +1,5 @@
 import { ADD_BOOK, MOVE_BOOK, DELETE_BOOK } from "../actionTypes";
-import searchInitialState from '../../constants';
+import { searchInitialState } from '../../constants';
 
 
 export default function (state = searchInitialState, action) {

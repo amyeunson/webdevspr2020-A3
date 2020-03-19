@@ -1,10 +1,11 @@
 import { SEARCH } from "../actionTypes";
-import { searchesInitialState } from '../../constants'
+import { searchInitialState } from '../../constants'
 
-export default function (state = searchesInitialState, action) {
+export default function (state = searchInitialState, action) {
     switch (action.type) {
         case SEARCH: {
-            return state;
+            console.log("---SEARCH--- " + action.payload);
+            return { ...state, search: action.payload };
         }
         default:
             return state;
