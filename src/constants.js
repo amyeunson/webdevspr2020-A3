@@ -7,8 +7,8 @@ export const listsInitialState = {
             id: 1
         },
         {
-            title: "Encyclopedia",
-            author: "Webster",
+            title: "Green Eggs and Ham",
+            author: "Dr. Seuss",
             id: 2
         }
     ],

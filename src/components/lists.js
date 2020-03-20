@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import BookItem from './bookItem';
 import { connect } from 'react-redux';
-import {Container, Card, CardTitle, CardHeader, CardBody, CardText} from 'reactstrap';
+import { Container, Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
 
 class Lists extends Component {
   render() {
@@ -17,7 +17,7 @@ class Lists extends Component {
               {this.props.toReadList.map((book)=>
                 <div key={book.id}>
                   <CardTitle>{book.title}</CardTitle>
-                      <BookItem className="mt-2" author={book.author} direction="Mark As Read" shelfLocation="ToRead" id={book.id}/>
+                      <BookItem className="mt-2" book={book} direction="Mark As Read" shelfLocation="ToRead" />
                 </div>     
               )}      
           </CardBody>
@@ -33,7 +33,7 @@ class Lists extends Component {
               {this.props.haveReadList.map((book)=>
                 <div key={book.id}>
                   <CardTitle>{book.title}</CardTitle>
-                      <BookItem author={book.author} direction="Mark As Not Read" shelfLocation="HaveRead" id={book.id}/>
+                      <BookItem book={book} direction="Mark As Not Read" shelfLocation="HaveRead" />
                 </div>     
               )}      
           </CardBody>

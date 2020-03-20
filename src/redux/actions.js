@@ -1,4 +1,4 @@
-import {SEARCH, DELETE_BOOK} from './actionTypes'
+import {SEARCH, DELETE_BOOK, MOVE_BOOK} from './actionTypes'
 
 
 export const search = (query) => ({
@@ -6,8 +6,14 @@ export const search = (query) => ({
     payload: query
 })
 
-export const deleteBook = (bookLocation, id) => ({
+export const deleteBook = (bookLocation, book) => ({
     type: DELETE_BOOK,
     bookListType: bookLocation,
-    bookId: id
+    bookInfo: book
+})
+
+export const moveBook = (bookLocation, book) => ({
+    type: MOVE_BOOK,
+    bookListType: bookLocation,
+    bookInfo: book
 })

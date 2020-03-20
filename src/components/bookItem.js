@@ -1,26 +1,31 @@
 
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { CardText,Button } from 'reactstrap';
 import{ connect } from 'react-redux';
-import { deleteBook } from '../redux/actions';
+import { deleteBook, moveBook } from '../redux/actions';
  
 class BookItem extends Component {
   render() {
     return (
       <div>
-              {this.props.author}
-              <Button outline color="primary" className="mt-2" size="sm">{this.props.direction}</Button>
-              <Button outline color="danger" className="mt-2" size="sm" 
-              onClick ={()=>{this.props.onClickDelete(this.props.shelfLocation,this.props.id)}}>Delete</Button>
-          
+        <CardText>{this.props.book.author}</CardText>
+        {/* Move Book Button */}
+        <Button outline color="primary" className="mb-3" size="sm" 
+        onClick ={()=>{this.props.move(this.props.shelfLocation,this.props.book)}}>
+        {this.props.direction}</Button>
+        {/* Delete Book Button */}
+        <Button outline color="danger" className="mb-3" size="sm" 
+        onClick ={()=>{this.props.delete(this.props.shelfLocation,this.props.book)}}>Delete</Button>
       </div>
+      
     )
   }
 }
 
 let mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return { 
-    onClickDelete: (shelfLocation, id) =>  dispatch( deleteBook(shelfLocation, id))
+    delete: (shelfLocation, book) =>  dispatch( deleteBook(shelfLocation, book)),
+    move: (shelfLocation, book) =>  dispatch( moveBook(shelfLocation, book))
   }
 }
 
