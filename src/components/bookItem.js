@@ -1,13 +1,13 @@
 
 import React, { Component } from 'react';
-import { CardText,Button } from 'reactstrap';
+import { CardText,Button, Container } from 'reactstrap';
 import{ connect } from 'react-redux';
 import { deleteBook, moveBook } from '../redux/actions';
  
 class BookItem extends Component {
   render() {
     return (
-      <div>
+      <Container>
         <CardText>{this.props.book.author}</CardText>
         {/* Move Book Button */}
         <Button outline color="primary" className="mb-3" size="sm" 
@@ -16,8 +16,7 @@ class BookItem extends Component {
         {/* Delete Book Button */}
         <Button outline color="danger" className="mb-3" size="sm" 
         onClick ={()=>{this.props.delete(this.props.shelfLocation,this.props.book)}}>Delete</Button>
-      </div>
-      
+      </Container>
     )
   }
 }
@@ -28,7 +27,6 @@ let mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
     move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
   }
 }
-
 
 let mapStateToProps = function (state, props) {
   return {

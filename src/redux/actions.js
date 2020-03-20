@@ -15,6 +15,6 @@ export const deleteBook = (bookLocation, book) => ({
 export const moveBook = (bookLocation, book, newMarkType) => ({
     type: MOVE_BOOK,
     currentLocation: bookLocation,
-    markType: newMarkType,
+    markType: newMarkType, // Move to MarkAsRead or MarkAsNotRead
     bookInfo: book
 })
