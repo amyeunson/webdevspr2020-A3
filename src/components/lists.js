@@ -15,11 +15,9 @@ class Lists extends Component {
           {/* Book Items  */}
           <CardBody>
               {this.props.toReadList.map((book)=>
-                <div>
+                <div key={book.id}>
                   <CardTitle>{book.title}</CardTitle>
-                    <CardText>  
-                      <BookItem className="mt-2" author={book.author} direction="Mark As Read" shelfLocation="ToRead"/>
-                    </CardText>
+                      <BookItem className="mt-2" author={book.author} direction="Mark As Read" shelfLocation="ToRead" id={book.id}/>
                 </div>     
               )}      
           </CardBody>
@@ -33,11 +31,9 @@ class Lists extends Component {
           {/* Book Items  */}
           <CardBody>
               {this.props.haveReadList.map((book)=>
-                <div>
+                <div key={book.id}>
                   <CardTitle>{book.title}</CardTitle>
-                    <CardText>  
-                      <BookItem author={book.author} direction="Mark As Not Read" shelfLocation="HaveRead"/>
-                    </CardText>
+                      <BookItem author={book.author} direction="Mark As Not Read" shelfLocation="HaveRead" id={book.id}/>
                 </div>     
               )}      
           </CardBody>

@@ -10,40 +10,15 @@ export default function list(state = listsInitialState, action) {
         case DELETE_BOOK: {
             if( action.bookListType === "ToRead"){
                 return Object.assign({}, state, {
-                    toRead: 
-                    [
-                        {
-                            title: "Changed",
-                            author: "Changed",
-                            id: 1 
-                        }   
-                    ]
-                    // toRead: state.toRead.filter((book) => book.id !== 20
-                    // )
-                        ,
-                    haveRead: 
-                        [{
-                            title: "Not",
-                            author: "Not",
-                            id: 1
-                        }]
+                    toRead: state.toRead.filter((book) => book.id !== action.bookId),
+                    haveRead: state.haveRead
                 })
 
             }
             else if (action.bookListType === "HaveRead") {
                 return Object.assign({}, state, {
-                toRead:[
-                    {
-                        title: "Not",
-                        author: "Not",
-                        id: 1
-                    }],
-                haveRead: 
-                    [{
-                        title: "Changed",
-                        author: "Changed",
-                        id: 1
-                    }]
+                toRead:state.toRead ,
+                haveRead: state.haveRead.filter((book) => book.id !== action.bookId), 
                 })
             }
             return state;
