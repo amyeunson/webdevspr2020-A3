@@ -12,8 +12,9 @@ export const deleteBook = (bookLocation, book) => ({
     bookInfo: book
 })
 
-export const moveBook = (bookLocation, book) => ({
+export const moveBook = (bookLocation, book, newMarkType) => ({
     type: MOVE_BOOK,
-    bookListType: bookLocation,
+    currentLocation: bookLocation,
+    markType: newMarkType,
     bookInfo: book
 })

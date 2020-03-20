@@ -11,8 +11,8 @@ class BookItem extends Component {
         <CardText>{this.props.book.author}</CardText>
         {/* Move Book Button */}
         <Button outline color="primary" className="mb-3" size="sm" 
-        onClick ={()=>{this.props.move(this.props.shelfLocation,this.props.book)}}>
-        {this.props.direction}</Button>
+        onClick ={()=>{this.props.move(this.props.shelfLocation,this.props.book, this.props.markType)}}>
+        {this.props.markType}</Button>
         {/* Delete Book Button */}
         <Button outline color="danger" className="mb-3" size="sm" 
         onClick ={()=>{this.props.delete(this.props.shelfLocation,this.props.book)}}>Delete</Button>
@@ -25,7 +25,7 @@ class BookItem extends Component {
 let mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return { 
     delete: (shelfLocation, book) =>  dispatch( deleteBook(shelfLocation, book)),
-    move: (shelfLocation, book) =>  dispatch( moveBook(shelfLocation, book))
+    move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
   }
 }
 

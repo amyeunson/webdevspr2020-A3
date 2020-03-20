@@ -7,13 +7,13 @@ export default function list(state = listsInitialState, action) {
             return state;
         }
         case DELETE_BOOK: {
-            if( action.bookListType === "ToRead"){
+            if( action.currentLocation === "ToRead"){
                 return Object.assign({}, state, {
                     toRead: state.toRead.filter((book) => book.id !== action.bookInfo.id),
                     haveRead: state.haveRead
                 })
             }
-            else if (action.bookListType === "HaveRead") {
+            else if (action.currentLocation === "HaveRead") {
                 return Object.assign({}, state, {
                 toRead:state.toRead ,
                 haveRead: state.haveRead.filter((book) => book.id !== action.bookInfo.id), 
@@ -23,13 +23,13 @@ export default function list(state = listsInitialState, action) {
 
         }
         case MOVE_BOOK: { 
-            if( action.bookListType === "ToRead"){
+            if( action.currentLocation === "ToRead" && action.markType === "Mark As Read"){
                 return Object.assign({}, state, {
                     toRead: state.toRead.filter((book) => book.id !== action.bookInfo.id),
                     haveRead: [...state.haveRead, action.bookInfo]
                 })
             }
-            else if (action.bookListType === "HaveRead") {
+            else if (action.currentLocation === "HaveRead" && action.markType === "Mark As Not Read") {
                 return Object.assign({}, state, {
                 toRead: [...state.toRead, action.bookInfo] ,
                 haveRead: state.haveRead.filter((book) => book.id !== action.bookInfo.id), 
