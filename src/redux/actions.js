@@ -8,7 +8,7 @@ export const search = (query) => ({
 
 export const deleteBook = (bookLocation, book) => ({
     type: DELETE_BOOK,
-    bookListType: bookLocation,
+    currentLocation: bookLocation,
     bookInfo: book
 })
 
