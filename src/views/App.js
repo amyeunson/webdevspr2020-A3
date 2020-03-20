@@ -8,8 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // temporary change to true for debugging efficiency
-      showLists: true
+      showLists: false
     }
     this.toggleView = this.toggleView.bind(this);
 
