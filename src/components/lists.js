@@ -1,13 +1,16 @@
 
 import React, { Component } from 'react';
-import BookItem from './bookItem';
+import BookItem from './listBookItem';
 import { connect } from 'react-redux';
 import { Container, Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
 import { Row } from 'reactstrap';
+import { MARK_READ, MARK_NOT_READ } from '../redux/actionTypes';
+
 class Lists extends Component {
   render() {
     return (
       <div>
+      
       {/* To Read List  */}
       <Container>
         <Row>
@@ -18,7 +21,7 @@ class Lists extends Component {
                 {this.props.toReadList.map((book)=>
                   <div key={book.id}>
                     <CardTitle>{book.title}</CardTitle>
-                        <BookItem className="mt-2" book={book} markType="Mark As Read" shelfLocation="ToRead" />
+                        <BookItem className="mt-2" book={book} markType = {MARK_READ} shelfLocation="ToRead" />
                   </div>     
                 )}      
             </CardBody>
@@ -32,7 +35,7 @@ class Lists extends Component {
                 {this.props.haveReadList.map((book)=>
                   <div key={book.id}>
                     <CardTitle>{book.title}</CardTitle>
-                        <BookItem book={book} markType="Mark As Not Read" shelfLocation="HaveRead" />
+                        <BookItem book={book} markType={MARK_NOT_READ} shelfLocation="HaveRead" />
                   </div>     
                 )}      
             </CardBody>
