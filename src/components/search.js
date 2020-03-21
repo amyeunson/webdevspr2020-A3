@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, InputGroup, Button, Input, Row, Col } from 'reactstrap';
-import { Container, Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
+import { Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { search } from '../redux/actions';
 import SearchBookItem from './searchBookItem';
@@ -38,22 +38,21 @@ class Search extends Component {
           </InputGroup>
         </Form>
 
-
         <Row>
           <Col>
-         {/* Have Read List  */}
-         <Card >
-            <CardHeader>Have Read List</CardHeader>
-            {/* Book Items  */}
-            <CardBody>
+            {/* Have Read List  */}
+            <Card >
+              <CardHeader>Have Read List</CardHeader>
+              {/* Book Items  */}
+              <CardBody>
                 {this.props.searchList.map((book)=>
                   <div key={book.id}>
                     <CardTitle>{book.title}</CardTitle>
-                        <SearchBookItem book={book} />
+                        <SearchBookItem book={book}/>
                   </div>     
                 )}      
-            </CardBody>
-          </Card>
+              </CardBody>
+            </Card>
           </Col>
         </Row>
       </div>

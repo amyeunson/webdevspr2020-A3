@@ -32,17 +32,17 @@ class Lists extends Component {
             <CardHeader>Have Read List</CardHeader>
             {/* Book Items  */}
             <CardBody>
-                {this.props.haveReadList.map((book)=>
-                  <div key={book.id}>
-                    <CardTitle>{book.title}</CardTitle>
-                        <BookItem book={book} markType={MARK_NOT_READ} shelfLocation="HaveRead" />
-                  </div>     
+              {this.props.haveReadList.map((book)=>
+                <div key={book.id}>
+                  <CardTitle>{book.title}</CardTitle>
+                      <BookItem book={book} markType={MARK_NOT_READ} shelfLocation="HaveRead" />
+                </div>     
                 )}      
-            </CardBody>
-          </Card>
-        </Row>
-      </Container>
-    </div>
+              </CardBody>
+            </Card>
+          </Row>
+        </Container>
+      </div>
     )
   }
 }
