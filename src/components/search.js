@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Form, InputGroup, Button, Input, Row, Col } from 'reactstrap';
+import { Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { search } from '../redux/actions';
+import SearchBookItem from './searchBookItem';
 
 class Search extends Component {
 
@@ -36,10 +38,21 @@ class Search extends Component {
           </InputGroup>
         </Form>
 
-
         <Row>
           <Col>
-            {/* For each search result, pass to BookItem */}
+            {/* Have Read List  */}
+            <Card >
+              <CardHeader>Have Read List</CardHeader>
+              {/* Book Items  */}
+              <CardBody>
+                {this.props.searchList.map((book)=>
+                  <div key={book.id}>
+                    <CardTitle>{book.title}</CardTitle>
+                        <SearchBookItem book={book}/>
+                  </div>     
+                )}      
+              </CardBody>
+            </Card>
           </Col>
         </Row>
       </div>
@@ -47,4 +60,10 @@ class Search extends Component {
   }
 }
 
-export default connect(null, { search })(Search);
+let mapStateToProps= function(state,props) {
+  return {
+    searchList: state.search.queryResult
+  }
+}
+
+export default connect(mapStateToProps, { search })(Search);

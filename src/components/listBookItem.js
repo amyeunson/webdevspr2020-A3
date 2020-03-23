@@ -4,7 +4,7 @@ import { CardText,Button, Container } from 'reactstrap';
 import{ connect } from 'react-redux';
 import { deleteBook, moveBook } from '../redux/actions';
  
-class BookItem extends Component {
+class ListBookItem extends Component {
   render() {
     return (
       <Container>
@@ -33,4 +33,4 @@ let mapStateToProps = function (state, props) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ListBookItem);
