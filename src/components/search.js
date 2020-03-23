@@ -34,7 +34,7 @@ class Search extends Component {
         <Form inline>
           <InputGroup>            
               <Input type="text" id="search" value={this.state.search} onChange={this.onFieldChange} />
-              <Button className="custom-blue" onClick={this.submitSearch}>Search</Button>
+              <Button className="custom-blue mb-3" onClick={this.submitSearch}>Search</Button>
           </InputGroup>
         </Form>
 
