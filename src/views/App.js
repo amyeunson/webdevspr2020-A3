@@ -21,6 +21,7 @@ class App extends Component {
   // Need to  use Router, BrowserRouter and Switch to redirect pages?
 
   render() {
+    console.log(process.env)
     return (
       <Container className="container">
         <Row>

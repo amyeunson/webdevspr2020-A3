@@ -7,16 +7,18 @@ const uuidv4 = require('uuid/v4');
 // get books from GoogleBooks endpoint
 router.get('/:search', (req, res) => {
     //fetch API with query params
-    let books;
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=")
-        .then(response => {
-            books = response;
-            //grab data for each book and save
-            console.log(books)
+   let books;
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=" + API_KEY + "&maxResults=40")
+        .then(data => {
+            books = data;
+            console.log(data);
         })
-    return res.send(books)
+        //grab data for each book and save
+        
+    return res.status(200).send(books);
 });
 
+// Test method
 router.get('/', (req, res) => {
     // give lists.js the book arrays
     console.log("INSIDE GET")

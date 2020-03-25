@@ -1,14 +1,12 @@
 import { UPDATE_SEARCHED_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK } from './actionTypes';
 import Axios from 'axios';
 
-
 export function search(query) {
     console.log("---SEARCH API----" + query);
     const apiQuery = bookHelper(query)
     console.log("API FRIENDLY", apiQuery);
     return function (dispatch) {
-        // Axios is a just an easy way to make an API call
-        // Fetch data containing return from Google Books API
+        // Fetch data containing return data from Google Books API
         return Axios.get(`/api/books/` + apiQuery)
             // Update store with search Results
             .then(response => dispatch(updateStore(response)),
