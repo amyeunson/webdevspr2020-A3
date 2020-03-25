@@ -1,15 +1,17 @@
-import { UPDATE_SEARCHED_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK } from './actionTypes'
-import Axios from 'axios'
+import { UPDATE_SEARCHED_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK } from './actionTypes';
+import Axios from 'axios';
 
 
 export function search(query) {
-    console.log("---SEARCH API----");
+    console.log("---SEARCH API----" + query);
+    const apiQuery = bookHelper(query)
+    console.log("API FRIENDLY", apiQuery);
     return function (dispatch) {
         // Axios is a just an easy way to make an API call
         // Fetch data containing return from Google Books API
-        return Axios.get(`/api/books/` + query)
+        return Axios.get(`/api/books/` + apiQuery)
             // Update store with search Results
-            .then(response => dispatch(updateStore(response.data)),
+            .then(response => dispatch(updateStore(response)),
                 error => console.log('An error occurred.', error)
             );
     }
@@ -39,4 +41,6 @@ export const moveBook = (bookLocation, book, newMarkType) => ({
     bookInfo: book
 })
 
-function bookHelper() { }
+function bookHelper(query) {
+    return query.replace(/ /g, "+")
+}
