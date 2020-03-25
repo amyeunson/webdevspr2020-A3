@@ -1,22 +1,25 @@
+const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 const uuidv4 = require('uuid/v4');
 
-// const foodList = [{foodId: "1234", name: 'banana', color: 'yellow', shape: 'crescent'},
-//     {foodId: "abcd", name: 'apple', color: "red/green", shape: 'round'}];
 
-// get books from API endpoint
+// get books from GoogleBooks endpoint
 router.get('/:search', (req, res) => {
     //fetch API with query params
-    const query = req.params.search;
-    res.send(query)
-    // Query format
-    // https://www.googleapis.com/books/v1/volumes?q=harry+potter
+    let books;
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=")
+        .then(response => {
+            books = response;
+            //grab data for each book and save
+            console.log(books)
+        })
+    return res.send(books)
 });
 
-// get books for each list
 router.get('/', (req, res) => {
     // give lists.js the book arrays
+    console.log("INSIDE GET")
     return res.send("Plain GET")
 });
 

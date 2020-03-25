@@ -31,6 +31,7 @@ class Search extends Component {
           </InputGroup>
         </Form>
 
+        {/* this is the API returned info */}
         {console.log(this.props.searchList)}
 
         {/* <Row>
