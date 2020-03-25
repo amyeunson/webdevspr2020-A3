@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import BookItem from './listBookItem';
 import { connect } from 'react-redux';
-import { Container, Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
-import { Row } from 'reactstrap';
+import { Container, Card, CardTitle, CardHeader, CardBody, Row } from 'reactstrap';
 import { MARK_READ, MARK_NOT_READ } from '../redux/actionTypes';
 
 class Lists extends Component {

@@ -13,6 +13,8 @@ export const searchInitialState = { queryResult:
             id: 6
         } 
     ]};
+
+    
 export const listsInitialState = { 
     toRead: [
         {

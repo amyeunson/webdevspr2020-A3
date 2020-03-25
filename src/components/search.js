@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, InputGroup, Button, Input, Row, Col } from 'reactstrap';
-import { Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
+import { Form, InputGroup, Button, Input, Row, Col, Card, CardTitle, CardHeader, CardBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { search } from '../redux/actions';
 import SearchBookItem from './searchBookItem';
@@ -15,16 +14,10 @@ class Search extends Component {
     }
 
     this.onFieldChange = this.onFieldChange.bind(this);
-    this.submitSearch = this.submitSearch.bind(this);
   }
 
   onFieldChange(event) {
     this.setState({ [event.target.id]: event.target.value });
-  }
-
-  submitSearch(event) {
-    event.preventDefault();
-    this.props.search(this.state.search);
   }
 
   render() {
@@ -32,38 +25,45 @@ class Search extends Component {
       <div>
 
         <Form inline>
-          <InputGroup>            
-              <Input type="text" id="search" value={this.state.search} onChange={this.onFieldChange} />
-              <Button className="custom-blue" onClick={this.submitSearch}>Search</Button>
+          <InputGroup>
+            <Input type="text" id="search" value={this.state.search} onChange={this.onFieldChange} />
+            <Button className="custom-blue mb-3" onClick={() => this.props.searchBooks(this.state.search)}>Search</Button>
           </InputGroup>
         </Form>
 
-        <Row>
+        {console.log(this.props.searchList)}
+
+        {/* <Row>
           <Col>
-            {/* Have Read List  */}
             <Card >
-              <CardHeader>Have Read List</CardHeader>
-              {/* Book Items  */}
+              <CardHeader>Results</CardHeader>
+             
               <CardBody>
-                {this.props.searchList.map((book)=>
+                {this.props.searchList.map((book) =>
                   <div key={book.id}>
                     <CardTitle>{book.title}</CardTitle>
-                        <SearchBookItem book={book}/>
-                  </div>     
-                )}      
+                    <SearchBookItem book={book} />
+                  </div>
+                )}
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
       </div>
     )
   }
 }
 
-let mapStateToProps= function(state,props) {
+let mapStateToProps = function (state, props) {
   return {
     searchList: state.search.queryResult
   }
 }
 
-export default connect(mapStateToProps, { search })(Search);
+function mapDispatchToProps(dispatch, props) {
+  return {
+    searchBooks: (props) => dispatch(search(props))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
