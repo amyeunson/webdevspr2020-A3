@@ -8,19 +8,22 @@ const uuidv4 = require('uuid/v4');
 // get books from API endpoint
 router.get('/:search', (req, res) => {
     //fetch API with query params
-    res.send()
+    const query = req.params.search;
+    res.send(query)
+    // Query format
+    // https://www.googleapis.com/books/v1/volumes?q=harry+potter
 });
 
 // get books for each list
 router.get('/', (req, res) => {
     // give lists.js the book arrays
-    res.send()
+    return res.send("Plain GET")
 });
 
 // place book on either list
 router.post('/', (req, res) => {
-     const body = req.body;
-     const bookId = uuidv4();
+    const body = req.body;
+    const bookId = uuidv4();
     // foodList.push({
     //     foodId: foodId,
     //     name: body.name,
@@ -33,7 +36,7 @@ router.post('/', (req, res) => {
 // Update book list placement
 router.put('/:bookId', (req, res) => {
     const bookId = req.params.bookId;
-    const bookId = req.body;
+    const bookItem = req.body;
     // const foundFood = foodList.find((foodItem) => foodItem.foodId === foodId);
     // if (!foundFood) {
     //     res.status(404);

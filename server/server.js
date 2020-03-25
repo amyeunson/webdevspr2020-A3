@@ -1,15 +1,22 @@
 const express = require('express');
 const books = require('./books.js');
-
+// const bodyParser = require('body-parser')
+const path = require('path');
 const app = express();
+var cors = require('cors');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'build')));
 
-// Note that it is common practice got backend APIs in Node to start with the api prefix
-// to distinguish them from frontend routes
 app.use('/api/books', books);
 
-app.listen(3001, function() {
-    console.log('Starting server');
+// app.get('/findBook', function (req, res) {
+//   return res.send('BookFound');
+// });
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+app.listen(process.env.PORT || 8080);
+
