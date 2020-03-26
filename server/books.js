@@ -13,10 +13,11 @@ router.get('/:search', (req, res) => {
             books = response;
             //grab data for each book and save
             console.log(books)
-        })
-    return res.send(books)
+        })        
+    return res.status(200).send(books);
 });
 
+// Test method
 router.get('/', (req, res) => {
     // give lists.js the book arrays
     console.log("INSIDE GET")
