@@ -8,7 +8,7 @@ const uuidv4 = require('uuid/v4');
 router.get('/:search', (req, res) => {
     //fetch API with query params
     let books;
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=")
+    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=AIzaSyCzmPJwOqDFnGys2ZYBgbF-HqwW3BLirBY")
         .then(response => {
             books = response;
             //grab data for each book and save
