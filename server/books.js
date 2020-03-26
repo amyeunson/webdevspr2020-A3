@@ -1,3 +1,4 @@
+import { moveBook, deleteBook } from '../src/redux/actions';
 const axios = require('axios');
 const express = require('express');
 const router = express.Router();
@@ -13,11 +14,11 @@ router.get('/:search', (req, res) => {
             books = response;
             //grab data for each book and save
             console.log(books)
-        })        
+        })
     return res.status(200).send(books);
 });
 
-// Test method
+// Test get method
 router.get('/', (req, res) => {
     // give lists.js the book arrays
     console.log("INSIDE GET")
@@ -26,14 +27,17 @@ router.get('/', (req, res) => {
 
 // place book on either list
 router.post('/', (req, res) => {
-    const body = req.body;
     const bookId = uuidv4();
-    // foodList.push({
-    //     foodId: foodId,
-    //     name: body.name,
-    //     color: body.color,
-    //     shape: body.shape,
-    // });
+    const bookItem = req.body;
+
+    const book = {
+        id: bookId,
+        title: bookItem.title,
+        author: bookItem.author,
+    }
+
+    // async
+    moveBook("Search", book, body.markType)
     res.status(200).send({ message: 'Success!', bookId: bookId });
 });
 
@@ -41,29 +45,31 @@ router.post('/', (req, res) => {
 router.put('/:bookId', (req, res) => {
     const bookId = req.params.bookId;
     const bookItem = req.body;
-    // const foundFood = foodList.find((foodItem) => foodItem.foodId === foodId);
-    // if (!foundFood) {
-    //     res.status(404);
-    //     return res.send({ error: 'Food not found!' });
-    // }
 
-    // foundFood.name = foodBody.name;
-    // foundFood.color = foodBody.color;
-    // foundFood.shape = foodBody.shape;
+    const book = {
+        id: bookId,
+        title: bookItem.title,
+        author: bookItem.author,
+    }
 
+    // async
+    moveBook("Search", book, bookItem.markType)
     res.status(200).send('Success!');
 });
 
 // delete book from list
 router.delete('/:bookId', function (req, res) {
     const bookId = req.params.bookId;
-    // for (var i = foodList.length - 1; i >= 0; i--) {
-    //     if (foodList[i].foodId === foodId) {
-    //         foodList.splice(i, 1);
-    //     }
-    // }
-    // Note that DELETE requests are ALWAYS successful,
-    // even if the resource is already delete
+    const bookItem = req.body;
+
+    const book = {
+        id: bookId,
+        title: bookItem.title,
+        author: bookItem.author,
+    }
+
+    //async
+    deleteBook("BookLocation", book)
     res.status(200).send('Success!');
 });
 

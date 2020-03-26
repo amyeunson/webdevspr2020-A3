@@ -2,9 +2,7 @@ import { UPDATE_SEARCHED_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK } fro
 import Axios from 'axios';
 
 export function search(query) {
-    console.log("---SEARCH API----" + query);
     const apiQuery = bookHelper(query)
-    console.log("API FRIENDLY", apiQuery);
     return function (dispatch) {
         // Fetch data containing return data from Google Books API
         return Axios.get(`/api/books/` + apiQuery)
