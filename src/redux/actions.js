@@ -6,12 +6,13 @@ export function search(query) {
     console.log("---SEARCH API----" + query);
     const apiQuery = bookHelper(query)
     console.log("API FRIENDLY", apiQuery);
+    fetch("http://localhost:8080/api/books/"+ apiQuery).then(res =>console.log(res.text()))
     return function (dispatch) {
         // Axios is a just an easy way to make an API call
         // Fetch data containing return from Google Books API
         return Axios.get(`/api/books/` + apiQuery)
             // Update store with search Results
-            .then(response => dispatch(updateStore(response)),
+            .then(response => dispatch(updateStore(response)), //
                 error => console.log('An error occurred.', error)
             );
     }

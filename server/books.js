@@ -3,6 +3,10 @@ const express = require('express');
 const router = express.Router();
 const uuidv4 = require('uuid/v4');
 
+let toRead = []
+let haveRead = []
+let searchList = []
+
 
 // get books from GoogleBooks endpoint
 router.get('/:search', (req, res) => {
@@ -10,11 +14,11 @@ router.get('/:search', (req, res) => {
     let books;
     axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=")
         .then(response => {
-            books = response;
+            books = response.data.items;
             //grab data for each book and save
-            console.log(books)
-        })
-    return res.send(books)
+            console.log(response.data.items)
+        }).then(()=> {return res.send(books)})
+    
 });
 
 router.get('/', (req, res) => {
