@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
     }
 
     // async
-    moveBook("Search", book, body.markType)
+    moveBook("Search", book, bookItem.markType)
     res.status(200).send({ message: 'Success!', bookId: bookId });
 });
 
