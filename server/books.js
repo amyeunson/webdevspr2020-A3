@@ -25,13 +25,13 @@ router.get('/:search', (req, res) => {
     axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=" + apiKey)
         .then(response => {
             
-            response.data.items.map((book)=>{ searchList = searchList.concat(
+            searchList = response.data.items.map((book)=>{ return (
                 {
                     title: book.volumeInfo.title,
                     authors: book.volumeInfo.authors,
                     id: book.id
-                }
-            );})
+                })
+            })
             //grab data for each book and save
             // console.log(response.data.items)
         }).then(()=> {res.send(searchList)}, 
