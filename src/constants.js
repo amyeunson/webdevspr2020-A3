@@ -1,18 +1,4 @@
-export const searchInitialState = { queryResult: 
-    [
-        {
-            title: "Book Found 1",
-            author: "Author",
-            description: "Description",
-            id: 5
-        },
-        { 
-            title: "Book Found 2",
-            author: "Author",
-            description: "Description",
-            id: 6
-        } 
-    ]};
+export const searchInitialState = { queryResult: []};
 
     
 export const listsInitialState = { 

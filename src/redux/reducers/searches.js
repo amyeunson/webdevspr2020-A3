@@ -1,7 +1,7 @@
 import { searchInitialState } from '../../constants';
 import { DELETE_SEARCH_BOOK, UPDATE_SEARCHED_BOOKS } from '../actionTypes';
 
-export default function searches(state = [], action) {
+export default function searches(state = searchInitialState, action) {
     switch (action.type) {
         case UPDATE_SEARCHED_BOOKS: {
             return { ...state, queryResult: action.payload }
