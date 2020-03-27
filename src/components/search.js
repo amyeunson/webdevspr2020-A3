@@ -34,7 +34,7 @@ class Search extends Component {
         {/* this is the API returned info */}
         {console.log(this.props.searchList)}
 
-        {/* <Row>
+        <Row>
           <Col>
             <Card >
               <CardHeader>Results</CardHeader>
@@ -49,7 +49,7 @@ class Search extends Component {
               </CardBody>
             </Card>
           </Col>
-        </Row> */}
+        </Row>
       </div>
     )
   }

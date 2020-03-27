@@ -10,7 +10,7 @@ class SearchBookItem extends Component {
     const shelfLocation = "Search";
     return (
       <Container>
-        <CardText>{this.props.book.author}</CardText>
+        <CardText>{this.props.book.authors}</CardText>
         {/* Mark as To Read Button */}
         <Button outline color="primary" className="mb-3" size="sm" 
         onClick ={()=>{this.moveAndDelete(shelfLocation, MARK_NOT_READ)}}>
