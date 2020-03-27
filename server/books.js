@@ -7,11 +7,7 @@ require('dotenv').config();
 const apiKey = process.env.GOOGLE_BOOKS_API_KEY
 console.log("Google API Key: " + apiKey)
 
-let searchList =
-    [{
-        title:"searchBook",
-        id:"1"
-    }]
+let searchList = []
 let haveRead = 
     [{
         title:"haveReadBook",
@@ -23,17 +19,22 @@ let toRead =
         id:"3"
     }]
 
-
 // get books from GoogleBooks endpoint
 router.get('/:search', (req, res) => {
     //fetch API with query params
-    let books;
     axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=" + apiKey)
         .then(response => {
-            books = response.data.items;
+            
+            response.data.items.map((book)=>{ searchList = searchList.concat(
+                {
+                    title: book.volumeInfo.title,
+                    authors: book.volumeInfo.authors,
+                    id: book.id
+                }
+            );})
             //grab data for each book and save
-            console.log(response.data.items)
-        }).then(()=> {return res.send(books)}, 
+            // console.log(response.data.items)
+        }).then(()=> {console.log(searchList)}, //return res.send(books)
         error => console.log('An error occurred.', error))
     
 });
