@@ -34,7 +34,7 @@ router.get('/:search', (req, res) => {
             );})
             //grab data for each book and save
             // console.log(response.data.items)
-        }).then(()=> {console.log(searchList)}, //return res.send(books)
+        }).then(()=> {res.send(searchList)}, 
         error => console.log('An error occurred.', error))
     
 });
