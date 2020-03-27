@@ -11,7 +11,7 @@ export function search(query) {
         // Fetch data containing return from Google Books API
         return Axios.get(`/api/books/` + apiQuery)
             // Update store with search Results
-            .then(response => console.log(response), //  dispatch(updateStore(response))
+            .then(response => dispatch(updateStore(response.data)), 
                 error => console.log('An error occurred.', error)
             );
     }
