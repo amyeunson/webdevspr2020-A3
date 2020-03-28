@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { CardText,Button, Container } from 'reactstrap';
 import{ connect } from 'react-redux';
-import { deleteSearchBook, moveBook } from '../redux/actions';
+import { addToMyBookLists } from '../redux/actions';
 import { MARK_READ, MARK_NOT_READ } from '../redux/actionTypes';
  
 class SearchBookItem extends Component {
@@ -12,24 +12,22 @@ class SearchBookItem extends Component {
       <Container>
         <CardText>{this.props.book.authors}</CardText>
         {/* Mark as To Read Button */}
-        <Button outline color="primary" className="mb-3" size="sm">
-        Mark As Not Read</Button>
+        <Button outline color="primary" className="mb-3" size="sm"
+        onClick={()=> this.props.add(this.props.book, "toRead")}>
+        { MARK_NOT_READ }</Button>
+
         {/* Mark As Have Read Button */}
-        <Button outline color="primary" className="mb-3" size="sm">Mark As Read</Button>
+        <Button outline color="primary" className="mb-3" size="sm" 
+        onClick={()=> this.props.add(this.props.book, "haveRead")}>
+        { MARK_READ }</Button>
       </Container>
     )
   }
-
-  // moveAndDelete = (shelfLocation, markType) => {
-  //   this.props.move(shelfLocation,this.props.book, markType)
-  //   this.props.delete(shelfLocation,this.props.book)
-  // }
 }
 
 let mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return { 
-    // delete: (shelfLocation, book) =>  dispatch( deleteSearchBook(shelfLocation, book)),
-    // move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
+    add: (book, markType) => dispatch(addToMyBookLists(book, markType))
   }
 }
 

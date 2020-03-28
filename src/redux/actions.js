@@ -1,4 +1,4 @@
-import { RECEIVE_SEARCHED_BOOKS, ADD_TO_TO_READ, RECEIVE_MY_BOOKS } from './actionTypes';
+import { RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, ADD_TO_MY_LIST } from './actionTypes';
 import Axios from 'axios';
 
 
@@ -28,7 +28,7 @@ export function search(query) {
 
 export function getMyBookLists() {
     return function (dispatch) {
-        return Axios.get('/api/books/myBookLists/')
+        return Axios.get('/api/books/')
             // Update store with search Results
             .then(response => dispatch(receiveMyBookLists(response.data)), 
                 error => console.log('An error occurred.', error)
@@ -36,13 +36,16 @@ export function getMyBookLists() {
     }
 }
 
-export function addSearchedBookToToRead(bookId) {
+export function addToMyBookLists(book, newMarkType) {
     return function (dispatch) {
-        return Axios.get('/myBookLists/addToRead/' + bookId)
-            // Update store with search Results
-            .then(response => dispatch(receiveMyBookLists(response.data)), 
-                error => console.log('An error occurred.', error)
-            );
+        console.log("action",book, newMarkType)
+        return Axios.post('/api/books/', {
+            title: book.title,
+            authors: book.authors,
+            id: book.id,
+            markType: newMarkType
+          }).then(response => dispatch(responseToAddBookLists(response.data)),
+            ).catch((error) =>console.log(error.message));
     }
 }
 
@@ -56,9 +59,9 @@ export const receiveMyBookLists = (myBooks) => ({
     myBookLists: myBooks // [toRead], [haveRead]
 })
 
-export const searchToToRead = (myBooks) => ({
-    type: ADD_TO_TO_READ,
-    myBookLists: myBooks // [toRead], [haveRead]
+export const responseToAddBookLists = (book) => ({
+    type: ADD_TO_MY_LIST,
+    bookName: book
 })
 
 // export const deleteBook = (bookLocation, book) => ({
