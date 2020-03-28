@@ -4,8 +4,14 @@ import BookItem from './listBookItem';
 import { connect } from 'react-redux';
 import { Container, Card, CardTitle, CardHeader, CardBody, Row } from 'reactstrap';
 import { MARK_READ, MARK_NOT_READ } from '../redux/actionTypes';
+import { getMyBookLists } from '../redux/actions'
 
 class Lists extends Component {
+
+  componentDidMount() {
+    this.props.onMount();
+  }
+
   render() {
     return (
       <div>
@@ -46,7 +52,6 @@ class Lists extends Component {
   }
 }
 
-
 let mapStateToProps = function mapStateToProps(state, props) {
   return { 
     toReadList: state.bookLists.toRead,
@@ -54,5 +59,12 @@ let mapStateToProps = function mapStateToProps(state, props) {
   }
 }
 
+function mapDispatchToProps(dispatch, props) {
+  return {
+      onMount: () => {
+          dispatch(getMyBookLists())
+      }
+  }
+};
 
-export default connect(mapStateToProps)(Lists);
+export default connect(mapStateToProps, mapDispatchToProps)(Lists);

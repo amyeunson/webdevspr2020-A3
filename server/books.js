@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
 });
 
 // GET books from GoogleBooks endpoint
-router.get('search/:search', (req, res) => {
+router.get('/search/:search', (req, res) => {
     //fetch API with query params
     axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=" + apiKey)
         .then(response => {
