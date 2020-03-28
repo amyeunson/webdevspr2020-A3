@@ -8,16 +8,32 @@ const apiKey = process.env.GOOGLE_BOOKS_API_KEY
 console.log("Google API Key: " + apiKey)
 
 let searchList = []
-let haveRead = 
-    [{
-        title:"haveReadBook",
-        id:"2"
-    }]
-let toRead =
-    [{
-        title:"toReadBook",
-        id:"3"
-    }]
+let myBooksList = { 
+    toRead: [
+        {
+            title: "I Know Why The Cage Bird Sings",
+            author: "Maya Angelou",
+            id: 1
+        },
+        {
+            title: "Green Eggs and Ham",
+            author: "Dr. Seuss",
+            id: 2
+        }
+    ],
+    haveRead: [
+        {
+            title: "The Rainbow Fish",
+            author: "Marcus Pfister",
+            id: 3
+        },
+        {
+            title: "Outliers",
+            author: "Malcolm Gladwell",
+            id: 4
+        }
+    ]
+} 
 
 // get books from GoogleBooks endpoint
 router.get('/:search', (req, res) => {
