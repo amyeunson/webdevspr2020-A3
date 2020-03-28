@@ -35,13 +35,6 @@ let myBookLists = {
     ]
 } 
 
-// Test get method
-router.get('/', (req, res) => {
-    // give lists.js the book arrays
-    console.log("INSIDE GET")
-    return res.send("Plain GET")
-});
-
 // GET books from GoogleBooks endpoint
 router.get('/search/:search', (req, res) => {
     //fetch API with query params
@@ -59,7 +52,6 @@ router.get('/search/:search', (req, res) => {
             // console.log(response.data.items)
         }).then(()=> {res.status(200).send(searchList)}, 
         error => console.log('An error occurred.', error))
-    
 });
 
 // GET books for MyLists
@@ -67,47 +59,28 @@ router.get('/myBookLists', (req, res) => {
     res.status(200).send(myBookLists)
 });
 
-// place book on either list
-router.post('/', (req, res) => {
-    const body = req.body;
-    const bookId = uuidv4();
-    // foodList.push({
-    //     foodId: foodId,
-    //     name: body.name,
-    //     color: body.color,
-    //     shape: body.shape,
-    // });
-    res.status(200).send({ message: 'Success!', bookId: bookId });
+// Add searched book to ToReadList
+router.post('/myBookLists/:bookId', (req, res) => { 
+    const bookId = req.params.bookId;
+    const bookItem = req.body;// body will require field for markType (mark as ToRead/HaveRead)
 });
 
-// Update book list placement
-router.put('/:bookId', (req, res) => {
+// Swap book from To Read to Have Read OR
+// Swap Have Read to To Read
+router.put('/myBookLists/:bookId', (req, res) => {
     const bookId = req.params.bookId;
-    const bookItem = req.body;
-    // const foundFood = foodList.find((foodItem) => foodItem.foodId === foodId);
-    // if (!foundFood) {
-    //     res.status(404);
-    //     return res.send({ error: 'Food not found!' });
-    // }
-
-    // foundFood.name = foodBody.name;
-    // foundFood.color = foodBody.color;
-    // foundFood.shape = foodBody.shape;
-
-    res.status(200).send('Success!');
+    const bookItem = req.body; // body will require fields for currentLocation and markType (mark as ToRead/HaveRead)
 });
 
-// delete book from list
-router.delete('/:bookId', function (req, res) {
+// Delete book from search list
+router.delete('/search/:bookId', function (req, res) {
     const bookId = req.params.bookId;
-    // for (var i = foodList.length - 1; i >= 0; i--) {
-    //     if (foodList[i].foodId === foodId) {
-    //         foodList.splice(i, 1);
-    //     }
-    // }
-    // Note that DELETE requests are ALWAYS successful,
-    // even if the resource is already delete
-    res.status(200).send('Success!');
+});
+
+// Delete book from Have Read list
+router.delete('/myBookLists/:bookId', function (req, res) {
+    const bookId = req.params.bookId; 
+    const bookItem = req.body;// body will require field for currentLocation
 });
 
 module.exports = router;
