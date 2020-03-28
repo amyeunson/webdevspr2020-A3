@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const uuidv4 = require('uuid/v4');
-require('dotenv').config();
 
 let myBookLists = { 
     toRead: [
