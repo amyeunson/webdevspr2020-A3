@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { CardText,Button, Container } from 'reactstrap';
 import{ connect } from 'react-redux';
-import { deleteBook, moveBook } from '../redux/actions';
+// import { deleteBook, moveBook } from '../redux/actions';
  
 class ListBookItem extends Component {
   render() {
@@ -23,8 +23,8 @@ class ListBookItem extends Component {
 
 let mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return { 
-    delete: (shelfLocation, book) =>  dispatch( deleteBook(shelfLocation, book)),
-    move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
+    // delete: (shelfLocation, book) =>  dispatch( deleteBook(shelfLocation, book)),
+    // move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
   }
 }
 

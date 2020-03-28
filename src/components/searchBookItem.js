@@ -12,26 +12,24 @@ class SearchBookItem extends Component {
       <Container>
         <CardText>{this.props.book.authors}</CardText>
         {/* Mark as To Read Button */}
-        <Button outline color="primary" className="mb-3" size="sm" 
-        onClick ={()=>{this.moveAndDelete(shelfLocation, MARK_NOT_READ)}}>
+        <Button outline color="primary" className="mb-3" size="sm">
         Mark As Not Read</Button>
         {/* Mark As Have Read Button */}
-        <Button outline color="primary" className="mb-3" size="sm" 
-        onClick ={()=>{this.moveAndDelete(shelfLocation, MARK_READ)}}>Mark As Read</Button>
+        <Button outline color="primary" className="mb-3" size="sm">Mark As Read</Button>
       </Container>
     )
   }
 
-  moveAndDelete = (shelfLocation, markType) => {
-    this.props.move(shelfLocation,this.props.book, markType)
-    this.props.delete(shelfLocation,this.props.book)
-  }
+  // moveAndDelete = (shelfLocation, markType) => {
+  //   this.props.move(shelfLocation,this.props.book, markType)
+  //   this.props.delete(shelfLocation,this.props.book)
+  // }
 }
 
 let mapDispatchToProps = function mapDispatchToProps(dispatch, props) {
   return { 
-    delete: (shelfLocation, book) =>  dispatch( deleteSearchBook(shelfLocation, book)),
-    move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
+    // delete: (shelfLocation, book) =>  dispatch( deleteSearchBook(shelfLocation, book)),
+    // move: (shelfLocation, book, markType ) =>  dispatch( moveBook(shelfLocation, book, markType))
   }
 }
 

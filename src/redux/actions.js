@@ -1,4 +1,4 @@
-import { RECEIVE_SEARCHED_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK, RECEIVE_MY_BOOKS } from './actionTypes';
+import { RECEIVE_SEARCHED_BOOKS, ADD_TO_TO_READ, RECEIVE_MY_BOOKS } from './actionTypes';
 import Axios from 'axios';
 
 
@@ -27,6 +27,16 @@ export function getMyBookLists() {
     }
 }
 
+export function addSearchedBookToToRead(bookId) {
+    return function (dispatch) {
+        return Axios.get('/myBookLists/addToRead/' + bookId)
+            // Update store with search Results
+            .then(response => dispatch(receiveMyBookLists(response.data)), 
+                error => console.log('An error occurred.', error)
+            );
+    }
+}
+
 export const receiveSearchList = (searchListInfo) => ({
     type: RECEIVE_SEARCHED_BOOKS,
     payload: searchListInfo
@@ -37,24 +47,29 @@ export const receiveMyBookLists = (myBooks) => ({
     myBookLists: myBooks // [toRead], [haveRead]
 })
 
-export const deleteBook = (bookLocation, book) => ({
-    type: DELETE_BOOK,
-    currentLocation: bookLocation,
-    bookInfo: book
+export const searchToToRead = (myBooks) => ({
+    type: ADD_TO_TO_READ,
+    myBookLists: myBooks // [toRead], [haveRead]
 })
 
-export const deleteSearchBook = (bookLocation, book) => ({
-    type: DELETE_SEARCH_BOOK,
-    currentLocation: bookLocation,
-    bookInfo: book
-})
+// export const deleteBook = (bookLocation, book) => ({
+//     type: DELETE_BOOK,
+//     currentLocation: bookLocation,
+//     bookInfo: book
+// })
 
-export const moveBook = (bookLocation, book, newMarkType) => ({
-    type: MOVE_BOOK,
-    currentLocation: bookLocation,
-    markType: newMarkType, // Move to MarkAsRead or MarkAsNotRead
-    bookInfo: book
-})
+// export const deleteSearchBook = (bookLocation, book) => ({
+//     type: DELETE_SEARCH_BOOK,
+//     currentLocation: bookLocation,
+//     bookInfo: book
+// })
+
+// export const moveBook = (bookLocation, book, newMarkType) => ({
+//     type: MOVE_BOOK,
+//     currentLocation: bookLocation,
+//     markType: newMarkType, // Move to MarkAsRead or MarkAsNotRead
+//     bookInfo: book
+// })
 
 function bookHelper(query) {
     return query.replace(/ /g, "+")
