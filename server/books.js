@@ -8,7 +8,7 @@ const apiKey = process.env.GOOGLE_BOOKS_API_KEY
 console.log("Google API Key: " + apiKey)
 
 let searchList = []
-let myBooksList = { 
+let myBookLists = { 
     toRead: [
         {
             title: "I Know Why The Cage Bird Sings",
@@ -35,7 +35,7 @@ let myBooksList = {
     ]
 } 
 
-// get books from GoogleBooks endpoint
+// GET books from GoogleBooks endpoint
 router.get('/:search', (req, res) => {
     //fetch API with query params
     axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=" + apiKey)
@@ -50,15 +50,14 @@ router.get('/:search', (req, res) => {
             })
             //grab data for each book and save
             // console.log(response.data.items)
-        }).then(()=> {res.send(searchList)}, 
+        }).then(()=> {res.status(200).send(searchList)}, 
         error => console.log('An error occurred.', error))
     
 });
 
-router.get('/', (req, res) => {
-    // give lists.js the book arrays
-    console.log("INSIDE GET")
-    return res.send("Plain GET")
+// GET books for MyLists
+router.get('/myBookLists', (req, res) => {
+    res.status(200).send(myBookLists)
 });
 
 // place book on either list
