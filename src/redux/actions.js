@@ -9,9 +9,18 @@ export function search(query) {
     return function (dispatch) {
         // Axios is a just an easy way to make an API call
         // Fetch data containing return from Google Books API
-        return Axios.get(`/api/books/search/` + apiQuery)
-            // Update store with search Results
-            .then(response => dispatch(receiveSearchList(response.data)), 
+        return Axios.get("https://www.googleapis.com/books/v1/volumes?q=" + apiQuery + "&key=" + process.env.REACT_APP_GOOGLE_BOOKS_API_KEY)
+        .then(response => {
+            return response.data.items.map((book)=>{ return (
+                {
+                    title: book.volumeInfo.title,
+                    authors: book.volumeInfo.authors,
+                    id: book.id
+                })
+            })
+        }, error => console.log('An error occurred.', error))
+        // Update store with search Results
+        .then(response => dispatch(receiveSearchList(response)), 
                 error => console.log('An error occurred.', error)
             );
     }
