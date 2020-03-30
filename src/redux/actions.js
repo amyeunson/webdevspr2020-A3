@@ -1,4 +1,4 @@
-import { RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, ADD_TO_MY_LIST } from './actionTypes';
+import { RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, ADD_TO_MY_LIST, DELETE_SEARCH_BOOK } from './actionTypes';
 import Axios from 'axios';
 
 
@@ -64,24 +64,10 @@ export const responseToAddBookLists = (book) => ({
     bookName: book
 })
 
-// export const deleteBook = (bookLocation, book) => ({
-//     type: DELETE_BOOK,
-//     currentLocation: bookLocation,
-//     bookInfo: book
-// })
-
-// export const deleteSearchBook = (bookLocation, book) => ({
-//     type: DELETE_SEARCH_BOOK,
-//     currentLocation: bookLocation,
-//     bookInfo: book
-// })
-
-// export const moveBook = (bookLocation, book, newMarkType) => ({
-//     type: MOVE_BOOK,
-//     currentLocation: bookLocation,
-//     markType: newMarkType, // Move to MarkAsRead or MarkAsNotRead
-//     bookInfo: book
-// })
+export const deleteSearchBook = (book) => ({
+    type: DELETE_SEARCH_BOOK,
+    bookInfo: book
+})
 
 function bookHelper(query) {
     return query.replace(/ /g, "+")
