@@ -47,7 +47,6 @@ export function addToMyBookLists(book, newMarkType) {
 // TODO: Figure out how to handle "response"
 export function updateMyBookLists(book, newMarkType) {
     return function (dispatch) {
-        console.log("action", book, newMarkType)
         return Axios.put('/api/books/' + book.id, {
             title: book.title,
             authors: book.authors,
@@ -60,7 +59,6 @@ export function updateMyBookLists(book, newMarkType) {
 
 export function deleteFromMyLists(book, markType) {
     return function (dispatch) {
-        console.log('in action', book, book.id, markType)
         return Axios.delete('/api/books/' + book.id, {
             title: book.title,
             authors: book.authors,

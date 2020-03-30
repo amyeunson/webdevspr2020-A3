@@ -57,7 +57,6 @@ router.post('/', (req, res) => {
 // Swap book from To Read to Have Read OR
 // Swap Have Read to To Read
 router.put('/:bookId', (req, res) => {
-    console.log(req);
     const bookItem = req.body;
     const markType = bookItem.markType // markType values are either "toRead" or "haveRead"
     const currentLocation = markType === "toRead" ? "haveRead" : "toRead"
