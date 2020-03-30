@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CardText,Button, Container } from 'reactstrap';
 import{ connect } from 'react-redux';
 import { addToMyBookLists, deleteSearchBook } from '../redux/actions';
-import { MARK_READ, MARK_NOT_READ } from '../redux/actionTypes';
+import { MARK_TO_READ_BUTTON, MARK_HAVE_READ_BUTTON } from '../constants';
  
 class SearchBookItem extends Component {
   
@@ -13,12 +13,12 @@ class SearchBookItem extends Component {
         {/* Mark as To Read Button */}
         <Button outline color="primary" className="mb-3" size="sm"
         onClick={ () => this.addAndDelete("toRead") }>
-        { MARK_NOT_READ }</Button>
+        { MARK_TO_READ_BUTTON }</Button>
 
         {/* Mark As Have Read Button */}
         <Button outline color="primary" className="mb-3" size="sm" 
         onClick={ () => this.addAndDelete("haveRead") }>
-        { MARK_READ }</Button>
+        { MARK_HAVE_READ_BUTTON }</Button>
       </Container>
     )
   }

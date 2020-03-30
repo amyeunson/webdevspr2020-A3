@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import BookItem from './listBookItem';
 import { connect } from 'react-redux';
 import { Container, Card, CardTitle, CardHeader, CardBody, Row } from 'reactstrap';
-import { MARK_READ, MARK_NOT_READ } from '../redux/actionTypes';
 import { getMyBookLists } from '../redux/actions'
+import {MARK_HAVE_READ_BUTTON, MARK_TO_READ_BUTTON} from '../constants'
 
 class Lists extends Component {
 
@@ -15,33 +15,32 @@ class Lists extends Component {
   render() {
     return (
       <div>
-      
-      {/* To Read List  */}
-      <Container>
-        <Row>
-          <Card >
-            <CardHeader>To Read List</CardHeader>
-            {/* Book Items  */}
-            <CardBody>
-                {this.props.toReadList.map((book)=>
+        {/* To Read List  */}
+        <Container>
+          <Row>
+            <Card >
+              <CardHeader>To Read List</CardHeader>
+              {/* Book Items  */}
+              <CardBody>
+                  {this.props.toReadList.map((book)=>
+                    <div key={book.id}>
+                      <CardTitle>{book.title}</CardTitle>
+                          <BookItem className="mt-2" book={book} markTypeTitle={MARK_HAVE_READ_BUTTON} markType="haveRead" />
+                    </div>     
+                  )}      
+              </CardBody>
+            </Card>
+          
+            {/* Have Read List  */}
+            <Card >
+              <CardHeader>Have Read List</CardHeader>
+              {/* Book Items  */}
+              <CardBody>
+                {this.props.haveReadList.map((book)=>
                   <div key={book.id}>
                     <CardTitle>{book.title}</CardTitle>
-                        <BookItem className="mt-2" book={book} markType = {MARK_READ} shelfLocation="ToRead" />
+                        <BookItem book={book} markTypeTitle={MARK_TO_READ_BUTTON} markType="toRead" />
                   </div>     
-                )}      
-            </CardBody>
-          </Card>
-        
-          {/* Have Read List  */}
-          <Card >
-            <CardHeader>Have Read List</CardHeader>
-            {/* Book Items  */}
-            <CardBody>
-              {this.props.haveReadList.map((book)=>
-                <div key={book.id}>
-                  <CardTitle>{book.title}</CardTitle>
-                      <BookItem book={book} markType={MARK_NOT_READ} shelfLocation="HaveRead" />
-                </div>     
                 )}      
               </CardBody>
             </Card>
@@ -61,9 +60,7 @@ let mapStateToProps = function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch, props) {
   return {
-      onMount: () => {
-          dispatch(getMyBookLists())
-      }
+      onMount: () => { dispatch(getMyBookLists())}
   }
 };
 
