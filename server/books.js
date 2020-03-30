@@ -35,14 +35,14 @@ router.get('/', (req, res) => {
 });
 
 // Add searched book to ToRead List Or HaveRead List
-// TODO: Change logic so it checks that both toRead and haveRead lists do not contain the book posted (not just one)
 router.post('/', (req, res) => { 
-    const bookItem = req.body;// body requires field for markType (markType values are "toRead"/"haveRead")
-    const markType = bookItem.markType
+    const bookItem = req.body;
+    const markType = bookItem.markType //markType values are "toRead"/"haveRead")
     if (markType === null || markType === ""){
         return res.status(400).send('Error. Must include a markType');
     }
-    const bookFound = myBookLists[markType].find((book) => book.id === bookItem.id);
+    const bookFound = myBookLists.toRead.find((book) => book.id === bookItem.id) || 
+        myBookLists.haveRead.find((book) => book.id === bookItem.id);
     if (bookFound){
         return res.status(400).send('Cannot add a duplicate book to your list.');
     }
@@ -58,7 +58,9 @@ router.post('/', (req, res) => {
 // Swap Have Read to To Read
 router.put('/:bookId', (req, res) => {
     const bookId = req.params.bookId;
-    const bookItem = req.body; // body will require fields for currentLocation and markType (markType values are "toRead"/"haveRead")
+    const bookItem = req.body;
+    const markType = bookItem.markType
+     // body will require fields for currentLocation and markType (markType values are "toRead"/"haveRead")
 });
 
 // Delete book from To Read OR Have Read list
