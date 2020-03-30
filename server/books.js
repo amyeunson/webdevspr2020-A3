@@ -60,9 +60,7 @@ router.put('/:bookId', (req, res) => {
     const bookId = req.params.bookId;
     const bookItem = req.body;
     const markType = bookItem.markType // markType values are either "toRead" or "haveRead"
-    console.log("BEFORE UPDATE: ", myBookLists)
-
-    const currentLocation = markType == "toRead" ? "haveRead" : "toRead"
+    const currentLocation = markType === "toRead" ? "haveRead" : "toRead"
     // add book to markType location
     myBookLists[markType] = myBookLists[markType].concat({
         title: bookItem.title,
@@ -70,8 +68,7 @@ router.put('/:bookId', (req, res) => {
         id: bookItem.id
     });
     // remove book from currently located list
-    myBookLists[currentLocation].filter((book) => book.id !== bookId)
-    console.log("AFTER UPDATE: ", myBookLists)
+    myBookLists[currentLocation] = myBookLists[currentLocation].filter((book) => book.id !== bookItem.id)
     res.status(200).send({message: 'Successfully moved your book!', id: bookItem.id});
 });
 
