@@ -1,4 +1,4 @@
-import { UPDATE_SEARCHED_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK } from './actionTypes';
+import { UPDATE_SEARCH_BOOKS, DELETE_BOOK, DELETE_SEARCH_BOOK, MOVE_BOOK } from './actionTypes';
 import Axios from 'axios';
 
 export function search(query) {
@@ -14,11 +14,12 @@ export function search(query) {
 }
 
 export const updateStore = (bookInfo) => ({
-    type: UPDATE_SEARCHED_BOOKS,
+    type: UPDATE_SEARCH_BOOKS,
     payload: bookInfo
 })
 
 export const deleteBook = (bookLocation, book) => ({
+    // will call Axios.delete(bookId).then(response=> methodThatUpdatesStore(response.data))
     type: DELETE_BOOK,
     currentLocation: bookLocation,
     bookInfo: book

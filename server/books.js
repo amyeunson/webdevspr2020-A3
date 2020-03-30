@@ -1,4 +1,3 @@
-import { moveBook, deleteBook } from '../src/redux/actions';
 const axios = require('axios');
 const express = require('express');
 const router = express.Router();
@@ -11,17 +10,14 @@ router.get('/:search', (req, res) => {
     let books;
     axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=AIzaSyCzmPJwOqDFnGys2ZYBgbF-HqwW3BLirBY")
         .then(response => {
-            books = response;
+            books = response.data.items;
             //grab data for each book and save
-            console.log(books)
-        })
-    return res.status(200).send(books);
+        }).then(() => { return res.send(books) })
 });
 
 // Test get method
 router.get('/', (req, res) => {
     // give lists.js the book arrays
-    console.log("INSIDE GET")
     return res.send("Plain GET")
 });
 
@@ -36,8 +32,8 @@ router.post('/', (req, res) => {
         author: bookItem.author,
     }
 
-    // async
-    moveBook("Search", book, bookItem.markType)
+    // will return bookId to be deleted to action
+
     res.status(200).send({ message: 'Success!', bookId: bookId });
 });
 
