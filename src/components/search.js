@@ -34,24 +34,30 @@ class Search extends Component {
         {/* this is the API returned info */}
         {console.log(this.props.searchList)}
 
-        {/* <Row>
+        <Row>
           <Col>
             <Card >
-              <CardHeader>Results</CardHeader>
-             
+              <CardHeader>Results</CardHeader>           
               <CardBody>
-                {this.props.searchList.map((book) =>
-                  <div key={book.id}>
-                    <CardTitle>{book.title}</CardTitle>
-                    <SearchBookItem book={book} />
-                  </div>
-                )}
+                {this.renderSearchList()}
               </CardBody>
             </Card>
           </Col>
-        </Row> */}
+        </Row>
       </div>
     )
+  }
+
+  renderSearchList() {
+    if (this.props.searchList && this.props.searchList.length > 0) {
+      const bookList = this.props.searchList.map((book) =>
+        <div key={book.id}>
+          <CardTitle>{book.title}</CardTitle>
+          <SearchBookItem book={book} />
+        </div>)
+      return (bookList)
+    }
+    return null;
   }
 }
 

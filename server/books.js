@@ -1,72 +1,81 @@
-const axios = require('axios');
 const express = require('express');
 const router = express.Router();
-const uuidv4 = require('uuid/v4');
 
+// TODO: set toRead and haveRead as empty
+const myBookLists = {
+    toRead: [
+        {
+            title: "I Know Why The Cage Bird Sings",
+            authors: "Maya Angelou",
+            id: 1
+        },
+        {
+            title: "Green Eggs and Ham",
+            authors: "Dr. Seuss",
+            id: 2
+        }
+    ],
+    haveRead: [
+        {
+            title: "The Rainbow Fish",
+            authors: "Marcus Pfister",
+            id: 3
+        },
+        {
+            title: "Outliers",
+            authors: "Malcolm Gladwell",
+            id: 4
+        }
+    ]
+}
 
-// get books from GoogleBooks endpoint
-router.get('/:search', (req, res) => {
-    //fetch API with query params
-    let books;
-    axios.get("https://www.googleapis.com/books/v1/volumes?q=" + req.params.search + "&key=AIzaSyCzmPJwOqDFnGys2ZYBgbF-HqwW3BLirBY")
-        .then(response => {
-            books = response.data.items;
-            //grab data for each book and save
-        }).then(() => { return res.send(books) })
-});
-
-// Test get method
+// GET books for MyLists
 router.get('/', (req, res) => {
-    // give lists.js the book arrays
-    return res.send("Plain GET")
+    res.status(200).send(myBookLists)
 });
 
-// place book on either list
+// Add searched book to ToRead List Or HaveRead List
 router.post('/', (req, res) => {
-    const bookId = uuidv4();
     const bookItem = req.body;
-
-    const book = {
-        id: bookId,
-        title: bookItem.title,
-        author: bookItem.author,
+    const markType = bookItem.markType // markType values are either "toRead" or "haveRead"
+    if (markType === null || markType === "") {
+        return res.status(400).send('Error. Must include a markType');
     }
-
-    // will return bookId to be deleted to action
-
-    res.status(200).send({ message: 'Success!', bookId: bookId });
+    const bookFound = myBookLists.toRead.find((book) => book.id === bookItem.id) ||
+        myBookLists.haveRead.find((book) => book.id === bookItem.id);
+    if (bookFound) {
+        return res.status(400).send('Cannot add a duplicate book to your list.');
+    }
+    myBookLists[markType] = myBookLists[markType].concat({
+        title: bookItem.title,
+        authors: bookItem.authors,
+        id: bookItem.id
+    });
+    res.status(200).send({ message: 'Successfully added a book!', id: bookItem.id });
 });
 
-// Update book list placement
+// Swap book from To Read to Have Read OR
+// Swap Have Read to To Read
 router.put('/:bookId', (req, res) => {
     const bookId = req.params.bookId;
     const bookItem = req.body;
-
-    const book = {
-        id: bookId,
+    const markType = bookItem.markType // markType values are either "toRead" or "haveRead"
+    const currentLocation = markType === "toRead" ? "haveRead" : "toRead"
+    // add book to markType location
+    myBookLists[markType] = myBookLists[markType].concat({
         title: bookItem.title,
-        author: bookItem.author,
-    }
-
-    // async
-    moveBook("Search", book, bookItem.markType)
-    res.status(200).send('Success!');
+        authors: bookItem.authors,
+        id: bookItem.id
+    });
+    // remove book from currently located list
+    myBookLists[currentLocation] = myBookLists[currentLocation].filter((book) => book.id !== bookItem.id)
+    res.status(200).send({ message: 'Successfully moved your book!', id: bookItem.id });
 });
 
-// delete book from list
+// Delete book from To Read OR Have Read list
 router.delete('/:bookId', function (req, res) {
     const bookId = req.params.bookId;
-    const bookItem = req.body;
-
-    const book = {
-        id: bookId,
-        title: bookItem.title,
-        author: bookItem.author,
-    }
-
-    //async
-    deleteBook("BookLocation", book)
-    res.status(200).send('Success!');
+    const bookItem = req.body;// body will require field for currentLocation
 });
 
 module.exports = router;
