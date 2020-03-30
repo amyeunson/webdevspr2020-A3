@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
 // Swap book from To Read to Have Read OR
 // Swap Have Read to To Read
 router.put('/:bookId', (req, res) => {
-    const bookId = req.params.bookId;
+    console.log(req);
     const bookItem = req.body;
     const markType = bookItem.markType // markType values are either "toRead" or "haveRead"
     const currentLocation = markType === "toRead" ? "haveRead" : "toRead"
@@ -73,9 +73,13 @@ router.put('/:bookId', (req, res) => {
 });
 
 // Delete book from To Read OR Have Read list
-router.delete('/:bookId', function (req, res) {
+router.delete('/:bookId', (req, res) => {
     const bookId = req.params.bookId;
-    const bookItem = req.body;// body will require field for currentLocation
+
+    myBookLists["haveRead"] = myBookLists["haveRead"].filter((book) => book.id !== bookId);
+    myBookLists["toRead"] = myBookLists["toRead"].filter((book) => book.id !== bookId);
+
+    res.status(200).send({ message: 'Successfully deleted a book!', id: bookId });
 });
 
 module.exports = router;

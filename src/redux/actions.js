@@ -26,7 +26,6 @@ export function search(query) {
 export function getMyBookLists() {
     return function (dispatch) {
         return Axios.get('/api/books/')
-            // Update store with search Results
             .then(response => dispatch(receiveMyBookLists(response.data)),
                 error => console.log('An error occurred.', error)
             );
@@ -59,9 +58,22 @@ export function updateMyBookLists(book, newMarkType) {
     }
 }
 
+export function deleteFromMyLists(book, markType) {
+    return function (dispatch) {
+        console.log('in action', book, book.id, markType)
+        return Axios.delete('/api/books/' + book.id, {
+            title: book.title,
+            authors: book.authors,
+            id: book.id,
+            markType: markType
+        }).then(response => dispatch(responseToUpdateBookLists()),
+        ).then(dispatch(getMyBookLists()));
+    }
+}
+
 export const receiveSearchList = (searchListInfo) => ({
     type: RECEIVE_SEARCHED_BOOKS,
-    payload: searchListInfo
+    payload: searchListInfo // [Books]
 })
 
 export const receiveMyBookLists = (myBooks) => ({
