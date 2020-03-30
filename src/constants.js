@@ -1,41 +1,22 @@
-export const searchInitialState = { queryResult: 
-    [
-        {
-            title: "Book Found 1",
-            author: "Author",
-            description: "Description",
-            id: 5
-        },
-        { 
-            title: "Book Found 2",
-            author: "Author",
-            description: "Description",
-            id: 6
-        } 
-    ]};
+export const searchInitialState = { queryResult: []};
+
+    
 export const listsInitialState = { 
     toRead: [
         {
-            title: "I Know Why The Cage Bird Sings",
-            author: "Maya Angelou",
+            title: "",
+            author: "",
             id: 1
         },
-        {
-            title: "Green Eggs and Ham",
-            author: "Dr. Seuss",
-            id: 2
-        }
     ],
     haveRead: [
         {
-            title: "The Rainbow Fish",
-            author: "Marcus Pfister",
-            id: 3
-        },
-        {
-            title: "Outliers",
-            author: "Malcolm Gladwell",
+            title: "",
+            author: "",
             id: 4
         }
     ]
 } 
+
+export const MARK_TO_READ_BUTTON = "Mark As Not Read"
+export const MARK_HAVE_READ_BUTTON = "Mark As Read"

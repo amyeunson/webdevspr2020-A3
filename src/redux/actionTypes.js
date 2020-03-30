@@ -1,7 +1,5 @@
-export const SEARCH = "SEARCH BOOK";
-export const ADD_BOOK = "ADD BOOK";
-export const DELETE_BOOK = "DELETE BOOK";
+export const RECEIVE_SEARCHED_BOOKS = "RECEIVE SEARCH RESULTS";
+export const RECEIVE_MY_BOOKS = "RECEIVE MY BOOKS";
+export const ADD_TO_MY_LIST = "ADD SEARCH BOOK TO ONE OF MY LISTS";
+export const UPDATE_MY_LIST = "UPDATE TO READ AND HAVE READ LISTS"
 export const DELETE_SEARCH_BOOK = "DELETE SEARCH BOOK";
-export const MOVE_BOOK = "MOVE BOOK"; // may not need , can handle this condition in ADD?
-export const MARK_READ = "Mark As Read";
-export const MARK_NOT_READ = "Mark As Not Read";
