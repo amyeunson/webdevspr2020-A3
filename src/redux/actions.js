@@ -1,4 +1,4 @@
-import { RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, ADD_TO_MY_LIST, UPDATE_MY_LIST, DELETE_SEARCH_BOOK } from './actionTypes';
+import { RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, RESET_ERROR, HANDLE_ERROR, DELETE_SEARCH_BOOK } from './actionTypes';
 import Axios from 'axios';
 
 export function search(query) {
@@ -24,6 +24,7 @@ export function search(query) {
 }
 
 export function getMyBookLists() {
+    console.log("Get my books");
     return function (dispatch) {
         return Axios.get('/api/books/')
             .then(response => dispatch(receiveMyBookLists(response.data)),
@@ -39,8 +40,7 @@ export function addToMyBookLists(book, newMarkType) {
             authors: book.authors,
             id: book.id,
             markType: newMarkType
-        }).then(response => dispatch(responseToAddBookLists(response.data)),
-        ).catch((error) => console.log(error.message));
+        }).then(response => console.log(response.data.flag))
     }
 }
 
@@ -52,7 +52,7 @@ export function updateMyBookLists(book, newMarkType) {
             authors: book.authors,
             id: book.id,
             markType: newMarkType
-        }).then(response => dispatch(responseToUpdateBookLists()),
+        }).then(response => console.log(response.data.flag)
         ).then(dispatch(getMyBookLists()));
     }
 }
@@ -64,33 +64,35 @@ export function deleteFromMyLists(book, markType) {
             authors: book.authors,
             id: book.id,
             markType: markType
-        }).then(response => dispatch(responseToUpdateBookLists()),
-        ).then(dispatch(getMyBookLists()));
+        }).then(response => console.log(response.data.flag))
+            .then(dispatch(getMyBookLists()));
     }
 }
 
+// Manipulate Search Results Lists
 export const receiveSearchList = (searchListInfo) => ({
     type: RECEIVE_SEARCHED_BOOKS,
     payload: searchListInfo // [Books]
 })
 
+export const deleteSearchBook = (book) => ({
+    type: DELETE_SEARCH_BOOK,
+    bookInfo: book
+})
+
+//Get MyLists to components via Redux store
 export const receiveMyBookLists = (myBooks) => ({
     type: RECEIVE_MY_BOOKS,
     myBookLists: myBooks // [toRead], [haveRead]
 })
 
-export const responseToAddBookLists = (book) => ({
-    type: ADD_TO_MY_LIST,
-    bookName: book
+export const uiErrorHandler = (message) => ({
+    type: HANDLE_ERROR,
+    payload: message
 })
 
-export const responseToUpdateBookLists = () => ({
-    type: UPDATE_MY_LIST
-})
-
-export const deleteSearchBook = (book) => ({
-    type: DELETE_SEARCH_BOOK,
-    bookInfo: book
+export const uiErrorReset = () => ({
+    type: RESET_ERROR
 })
 
 function bookHelper(query) {
