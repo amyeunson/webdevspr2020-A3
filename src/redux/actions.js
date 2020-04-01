@@ -1,4 +1,7 @@
-import { RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, RESET_ERROR, HANDLE_ERROR, DELETE_SEARCH_BOOK } from './actionTypes';
+import {
+    RECEIVE_SEARCHED_BOOKS, RECEIVE_MY_BOOKS, RESET_ERROR, HANDLE_SUCCESS, HANDLE_DELETE_ERROR, HANDLE_UPDATE_ERROR,
+    HANDLE_ADD_TWICE_ERROR, DELETE_SEARCH_BOOK, HANDLE_GET_ERROR, HANDLE_SEARCH_DISPLAY_ERROR, HANDLE_API_ERROR
+} from './actionTypes';
 import Axios from 'axios';
 
 export function search(query) {
@@ -15,21 +18,18 @@ export function search(query) {
                             id: book.id
                         })
                 })
-            }, error => console.log('An error occurred.', error))
-            // Update store with the searched book results
-            .then(response => dispatch(receiveSearchList(response)),
-                error => console.log('An error occurred.', error)
-            );
+            }, error => dispatch(handleAPIError(error))
+                // Update store with the searched book results
+            ).then(response => dispatch(receiveSearchList(response)),
+                error => dispatch(handleDisplaySearched(error)))
     }
 }
 
 export function getMyBookLists() {
-    console.log("Get my books");
     return function (dispatch) {
         return Axios.get('/api/books/')
             .then(response => dispatch(receiveMyBookLists(response.data)),
-                error => console.log('An error occurred.', error)
-            );
+                error => dispatch(handleGetError(error)))
     }
 }
 
@@ -40,7 +40,8 @@ export function addToMyBookLists(book, newMarkType) {
             authors: book.authors,
             id: book.id,
             markType: newMarkType
-        }).then(response => console.log(response.data.flag))
+        }).then(response => dispatch(handleSuccess(response)),
+            error => dispatch(handleTwiceAddError(error)))
     }
 }
 
@@ -52,7 +53,8 @@ export function updateMyBookLists(book, newMarkType) {
             authors: book.authors,
             id: book.id,
             markType: newMarkType
-        }).then(response => console.log(response.data.flag)
+        }).then(response => dispatch(handleSuccess(response)),
+            error => dispatch(handleUpdateError(error))
         ).then(dispatch(getMyBookLists()));
     }
 }
@@ -64,8 +66,9 @@ export function deleteFromMyLists(book, markType) {
             authors: book.authors,
             id: book.id,
             markType: markType
-        }).then(response => console.log(response.data.flag))
-            .then(dispatch(getMyBookLists()));
+        }).then(response => dispatch(handleSuccess(response)),
+            error => dispatch(handleDeleteError(error))
+        ).then(dispatch(getMyBookLists()));
     }
 }
 
@@ -80,21 +83,46 @@ export const deleteSearchBook = (book) => ({
     bookInfo: book
 })
 
-//Get MyLists to components via Redux store
+// Get MyLists to components via Redux store
 export const receiveMyBookLists = (myBooks) => ({
     type: RECEIVE_MY_BOOKS,
     myBookLists: myBooks // [toRead], [haveRead]
 })
 
-export const uiErrorHandler = (message) => ({
-    type: HANDLE_ERROR,
-    payload: message
+// Handle success and errors
+export const handleSuccess = () => ({
+    type: HANDLE_SUCCESS
 })
 
 export const uiErrorReset = () => ({
     type: RESET_ERROR
 })
 
+export const handleTwiceAddError = () => ({
+    type: HANDLE_ADD_TWICE_ERROR
+})
+
+export const handleUpdateError = () => ({
+    type: HANDLE_UPDATE_ERROR
+})
+
+export const handleDeleteError = () => ({
+    type: HANDLE_DELETE_ERROR
+})
+
+export const handleGetError = () => ({
+    type: HANDLE_GET_ERROR
+})
+
+export const handleAPIError = () => ({
+    type: HANDLE_API_ERROR
+})
+
+export const handleDisplaySearched = () => ({
+    type: HANDLE_SEARCH_DISPLAY_ERROR
+})
+
+// Helpers
 function bookHelper(query) {
     return query.replace(/ /g, "+")
 }

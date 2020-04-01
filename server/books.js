@@ -3,30 +3,8 @@ const router = express.Router();
 
 // TODO: set toRead and haveRead as empty
 const myBookLists = {
-    toRead: [
-        {
-            title: "I Know Why The Cage Bird Sings",
-            authors: "Maya Angelou",
-            id: 1
-        },
-        {
-            title: "Green Eggs and Ham",
-            authors: "Dr. Seuss",
-            id: 2
-        }
-    ],
-    haveRead: [
-        {
-            title: "The Rainbow Fish",
-            authors: "Marcus Pfister",
-            id: 3
-        },
-        {
-            title: "Outliers",
-            authors: "Malcolm Gladwell",
-            id: 4
-        }
-    ]
+    toRead: [],
+    haveRead: []
 }
 
 // GET books for MyLists
@@ -44,7 +22,7 @@ router.post('/', (req, res) => {
     const bookFound = myBookLists.toRead.find((book) => book.id === bookItem.id) ||
         myBookLists.haveRead.find((book) => book.id === bookItem.id);
     if (bookFound) {
-        return res.status(400).send('Cannot add a duplicate book to your list.');
+        return res.status(400).send("Error. Can not add book twice");
     }
     myBookLists[markType] = myBookLists[markType].concat({
         title: bookItem.title,
