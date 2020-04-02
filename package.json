@@ -23,7 +23,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "run-p server devreact",
+    "start": "run-p devreact server",
     "devreact": "react-scripts start",
     "build": "react-scripts build",
     "server": "node server/server.js",
