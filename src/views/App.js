@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import { Container, Button, Row, Col } from 'reactstrap';
+import Feedback from "../components/Feedback";
 import Search from '../components/search';
 import Lists from '../components/lists';
 
@@ -23,6 +24,7 @@ class App extends Component {
   render() {
     return (
       <Container className="container">
+        <Feedback />
         <Row>
           <Col className="col-12 col-md-2 mt-4">
             {!this.state.showLists ? <Button className="custom-blue" onClick={this.toggleView}>My Lists</Button>
