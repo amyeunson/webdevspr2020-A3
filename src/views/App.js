@@ -5,7 +5,6 @@ import Feedback from "../components/Feedback";
 import Search from '../components/search';
 import Lists from '../components/lists';
 
-// "proxy": "http://localhost:8080",
 
 class App extends Component {
   constructor(props) {
