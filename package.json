@@ -24,6 +24,7 @@
   "scripts": {
     "start": "run-p server devreact",
     "devreact": "react-scripts start",
+    "build": "react-scripts build",
     "server": "node server/server.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
