@@ -1,6 +1,5 @@
 {
   "name": "webdevspr2020_a3",
-  "proxy": "http://localhost:8080",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

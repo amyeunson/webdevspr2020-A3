@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalFooter, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { uiErrorReset } from '../redux/actions';
 import {
@@ -35,7 +35,7 @@ class Feedback extends Component {
             } case (UI_FLAG_DELETE_ERROR): {
                 return "Could not delete book";
             } case (UI_FLAG_ADD_BOOK_TWICE): {
-                return "Error: You can not add the same book twice";
+                return "You can not add the same book twice";
             }
             default: {
                 return ""
@@ -54,11 +54,11 @@ class Feedback extends Component {
     render() {
         return (
             <Modal isOpen={this.checkError()} toggle={this.toggle}>
-                <ModalBody >
-                    <h5>{this.setMessage()}</h5>
-                </ModalBody>
+                <ModalHeader>
+                    Error: {this.setMessage()}
+                </ModalHeader>
                 <ModalFooter>
-                    <Button onClick={this.toggle}>Exit</Button>
+                    <Button onClick={this.toggle}>OK</Button>
                 </ModalFooter>
             </Modal>
         )
