@@ -1,1 +1,0 @@
-{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,KACI,sBACJ,CAEA,aACI,wBACJ","file":"main.07f8e871.chunk.css","sourcesContent":["body{\r\n    font-family: sans-serif;\r\n}\r\n\r\n.custom-blue{\r\n    background-color: rgb(101, 101, 179);\r\n}\r\n"]}
