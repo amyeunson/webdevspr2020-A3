@@ -19,11 +19,10 @@ class App extends Component {
     this.setState({ showLists: !this.state.showLists })
   }
 
-  // Need to  use Router, BrowserRouter and Switch to redirect pages?
-
   render() {
     return (
       <Container className="container">
+        <h1>BookList App</h1>
         <Feedback />
         <Row>
           <Col className="col-12 col-md-2 mt-4">

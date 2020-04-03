@@ -1,3 +1,7 @@
+Assignment 3
+Amy Eunson and Leah Mamaril
+Heroku Link: https://web-dev-a3-leah-amy.herokuapp.com/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

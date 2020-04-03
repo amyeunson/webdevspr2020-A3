@@ -9,7 +9,7 @@ class SearchBookItem extends Component {
   render() {
     return (
       <Container>
-        <CardText>{this.props.book.authors}</CardText>
+        <CardText>{this.formattedAuthors(this.props.book.authors)}</CardText>
         {/* Mark as To Read Button */}
         <Button outline color="primary" className="mb-3" size="sm"
         onClick={ () => this.addAndDelete("toRead") }>
@@ -26,6 +26,24 @@ class SearchBookItem extends Component {
   addAndDelete = (markType) => {
     this.props.add(this.props.book, markType)
     this.props.delete(this.props.book)
+  }
+
+  formattedAuthors = (authorList) => {
+    let formattedListString = ""
+    if (authorList.length === 0) {
+      formattedListString += "No Author Listed"
+    } else {
+      formattedListString += "By: "
+      if (authorList.length === 1) {
+        formattedListString += authorList[0]
+      } else {
+        for (let i=0; i<authorList.length-1; i+=1) {
+          formattedListString += authorList[i] + ", "
+        }
+        formattedListString += authorList[authorList.length-1]
+      }
+    }
+    return formattedListString;
   }
 }
 
