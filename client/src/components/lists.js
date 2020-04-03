@@ -1,8 +1,7 @@
-
 import React, { Component } from 'react';
 import BookItem from './listBookItem';
 import { connect } from 'react-redux';
-import { Container, Card, CardTitle, CardHeader, CardBody, Row } from 'reactstrap';
+import { Container, Card, CardTitle, CardHeader, CardBody, Row, Col } from 'reactstrap';
 import { getMyBookLists } from '../redux/actions'
 import {MARK_HAVE_READ_BUTTON, MARK_TO_READ_BUTTON} from '../constants'
 
@@ -18,8 +17,9 @@ class Lists extends Component {
         {/* To Read List  */}
         <Container>
           <Row>
+            <Col>
             <Card >
-              <CardHeader>To Read List</CardHeader>
+              <CardHeader><h5>To Read</h5></CardHeader>
               {/* Book Items  */}
               <CardBody>
                   {this.props.toReadList.map((book)=>
@@ -30,10 +30,12 @@ class Lists extends Component {
                   )}      
               </CardBody>
             </Card>
+            </Col>
           
             {/* Have Read List  */}
+            <Col>
             <Card >
-              <CardHeader>Have Read List</CardHeader>
+              <CardHeader><h5>Have Read</h5></CardHeader>
               {/* Book Items  */}
               <CardBody>
                 {this.props.haveReadList.map((book)=>
@@ -44,7 +46,9 @@ class Lists extends Component {
                 )}      
               </CardBody>
             </Card>
+            </Col>
           </Row>
+          
         </Container>
       </div>
     )

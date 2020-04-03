@@ -34,7 +34,7 @@ class Search extends Component {
         <Row>
           <Col>
             <Card >
-              <CardHeader>Results</CardHeader>
+              <CardHeader><h5>Results</h5></CardHeader>
               <CardBody>
                 {this.renderSearchList()}
               </CardBody>
